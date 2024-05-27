@@ -50,15 +50,16 @@ export const useP5 = () => {
       };
 
       p5Instance.draw = () => {
-        p5Instance.background(255);
+        p5Instance.background(0);
 
-        // 波紋を描画
         for (let i = ripples.length - 1; i >= 0; i--) {
           const r = ripples[i];
-          p5Instance.stroke(0, 0, 0, r.alpha);
+          p5Instance.stroke(77, 215, 227, r.alpha);
+          p5Instance.strokeWeight(4);
           p5Instance.ellipse(r.x, r.y, r.radius * 10, r.radius * 10);
-          r.radius += 2;
-          r.alpha -= 4;
+
+          r.radius += 1;
+          r.alpha -= 1;
 
           // 透明度が0以下なら削除
           if (r.alpha <= 0) {
@@ -82,6 +83,7 @@ export const useP5 = () => {
           ...position,
           radius: 0,
           alpha: 255,
+          blur: 0,
         };
 
         const id = new URLSearchParams(window.location.search).get("id");
